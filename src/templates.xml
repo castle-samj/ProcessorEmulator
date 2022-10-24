@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- recommended min/max: calc=10/100  i/o=1-25 -->
+<processes>
+    <temp1>
+        <type1>
+            <action> calculate </action>
+            <min> 005 </min>
+            <max> 100</max>
+        </type1>
+        <type1>
+            <action> I/O </action>
+            <min> 010 </min>
+            <max> 020 </max>
+        </type1>
+        <type1>
+            <action> calculate </action>
+            <min> 010 </min>
+            <max> 090 </max>
+        </type1>
+        <type1>
+            <action> I/O </action>
+            <min> 001 </min>
+            <max> 010 </max>
+        </type1>
+        <type1>
+            <action> calculate </action>
+            <min> 050 </min>
+            <max> 095 </max>
+        </type1>
+    </temp1>
+    <temp2>
+        <type2>
+            <action> calculate </action>
+            <min> 005 </min>
+            <max> 100</max>
+        </type2>
+        <type2>
+            <action> I/O </action>
+            <min> 010 </min>
+            <max> 020 </max>
+        </type2>
+        <type2>
+            <action> calculate </action>
+            <min> 010 </min>
+            <max> 090 </max>
+        </type2>
+        <type2>
+            <action> I/O </action>
+            <min> 001 </min>
+            <max> 010 </max>
+        </type2>
+        <type2>
+            <action> calculate </action>
+            <min> 050 </min>
+            <max> 095 </max>
+        </type2>
+    </temp2>
+    <temp3>
+        <type3>
+            <action> calculate </action>
+            <min> 005 </min>
+            <max> 100</max>
+        </type3>
+        <type3>
+            <action> I/O </action>
+            <min> 010 </min>
+            <max> 020 </max>
+        </type3>
+        <type3>
+            <action> calculate </action>
+            <min> 010 </min>
+            <max> 090 </max>
+        </type3>
+        <type3>
+            <action> I/O </action>
+            <min> 001 </min>
+            <max> 010 </max>
+        </type3>
+        <type3>
+            <action> calculate </action>
+            <min> 050 </min>
+            <max> 095 </max>
+        </type3>
+    </temp3>
+    <temp4>
+        <type4>
+            <action> calculate </action>
+            <min> 005 </min>
+            <max> 100</max>
+        </type4>
+        <type4>
+            <action> I/O </action>
+            <min> 010 </min>
+            <max> 020 </max>
+        </type4>
+        <type4>
+            <action> calculate </action>
+            <min> 010 </min>
+            <max> 090 </max>
+        </type4>
+        <type4>
+            <action> I/O </action>
+            <min> 001 </min>
+            <max> 010 </max>
+        </type4>
+        <type4>
+            <action> calculate </action>
+            <min> 050 </min>
+            <max> 095 </max>
+        </type4>
+    </temp4>
+    <temp5>
+        <type5>
+            <action> calculate </action>
+            <min> 005 </min>
+            <max> 100</max>
+        </type5>
+        <type5>
+            <action> I/O </action>
+            <min> 010 </min>
+            <max> 020 </max>
+        </type5>
+        <type5>
+            <action> calculate </action>
+            <min> 010 </min>
+            <max> 090 </max>
+        </type5>
+        <type5>
+            <action> I/O </action>
+            <min> 001 </min>
+            <max> 010 </max>
+        </type5>
+        <type5>
+            <action> calculate </action>
+            <min> 050 </min>
+            <max> 095 </max>
+        </type5>
+    </temp5>
+</processes>
