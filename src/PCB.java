@@ -10,9 +10,12 @@ public class PCB {
     private int PID;
     private int programCounter; // current register index value
     private ArrayList<operation> registers = new ArrayList<operation>();
-    // vars not implemented
+
+    // TODO vars not implemented
     // Priority
     // Accounting
+    // Memory Management Information
+    // I/O Status
 
     /* setters */
     public void setCurrentState(state newState) {
