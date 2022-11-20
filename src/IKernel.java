@@ -1,4 +1,7 @@
-/** Maintains some persistent information for the current instance */
+/**
+ * @author Sam Castle - 11/20/2022 - CMSC312 CPU Emulator
+ * Maintains some persistent information for the current instance
+ */
 public class IKernel {
     // environment variables
     private static int SIZE_OF_MAIN_MEMORY;
@@ -26,10 +29,10 @@ public class IKernel {
     }
 
     /* setters */
-    public static void setSize_of_main_memory(int num) {
+    public static void setSizeOfMainMemory(int num) {
         IKernel.SIZE_OF_MAIN_MEMORY = num;
     }
-    public static void setMax_instructions_per_process(int num) {
+    public static void setMaxInstructionsPerProcess(int num) {
         IKernel.MAX_INSTRUCTIONS_PER_PROCESS = num;
     }
     public static void setSizeOfFrame(int num){
@@ -68,19 +71,19 @@ public class IKernel {
     public static short generateHID() {
         return HID_CONTROL++;
     }
-    public static CPU getLocalCPU() {
+    public CPU getLocalCPU() {
         return LOCAL_CPU;
     }
-    public static MassStorage getLocalHDD() {
+    public MassStorage getLocalHDD() {
         return LOCAL_HDD;
     }
-    public static MainMemory getLocalRAM() {
+    public MainMemory getLocalRAM() {
         return LOCAL_RAM;
     }
-    public static IScheduler getLocalScheduler() {
+    public IScheduler getLocalScheduler() {
         return LOCAL_SCHEDULER;
     }
-    public static IOController getLocalIO() {
+    public IOController getLocalIO() {
         return LOCAL_IO;
     }
 

@@ -1,7 +1,7 @@
 import java.util.Scanner;
 
 /**
- * @author Sam Castle - 10/23/2022 - CMSC312 CPU Emulator
+ * @author Sam Castle - 11/20/2022 - CMSC312 CPU Emulator
  */
 public class Main extends IKernel {
     public static void main(String[] args) {
@@ -9,17 +9,17 @@ public class Main extends IKernel {
         /* System Configuration and Initialization */
 
         // initialize Main Memory to this size (in MB)
-        setSize_of_main_memory(512);
+        setSizeOfMainMemory(512);
         setSizeOfFrame(8);
-        setMax_instructions_per_process(5);
-        CPU currentCPU = new CPU();
-        MassStorage currentHDD = new MassStorage();
-        MainMemory currentRAM = new MainMemory();
-        IOController currentIOController = new IOController();
+        setMaxInstructionsPerProcess(5);
+        CPU CURRENT_CPU = new CPU();
+        MassStorage CURRENT_HDD = new MassStorage();
+        MainMemory CURRENT_RAM = new MainMemory();
+        IOController CURRENT_IO_CONTROLLER = new IOController();
         // TODO allow user to select scheduler
-        sRoundRobin currentScheduler = new sRoundRobin();
-        Dispatcher currentDispatcher = new Dispatcher(currentCPU, currentHDD, currentRAM, currentIOController);
-        currentDispatcher.setLocalScheduler(currentScheduler);
+        sRoundRobin CURRENT_SCHEDULER = new sRoundRobin();
+        Dispatcher CURRENT_DISPATCHER = new Dispatcher(CURRENT_CPU, CURRENT_HDD, CURRENT_RAM, CURRENT_IO_CONTROLLER);
+        CURRENT_DISPATCHER.setLocalScheduler(CURRENT_SCHEDULER);
 
         Scanner userInput = new Scanner(System.in);
         boolean run = true; // shell control var
@@ -44,30 +44,33 @@ public class Main extends IKernel {
                 case -1:
                     System.out.println("Invalid input!\n");
                     break;
-                case 1: // automatic trial run
-                    auto(currentScheduler, currentDispatcher);
+                case 1:
+                    // automatic trial run
+                    auto(CURRENT_DISPATCHER);
                     break;
-                case 2: // create new processes
+                case 2:
+                    // create new processes
                     System.out.println("Enter a number of processes to create:");
                     int userNum = Integer.parseInt(userInput.nextLine());
-                    build(currentScheduler, currentDispatcher, userNum);
+                    build(userNum, CURRENT_HDD);
                     break;
-                case 3: // display scheduled processes
-                    if (currentScheduler.isEmpty()) {
+                case 3:
+                    // display scheduled processes
+                    if (CURRENT_SCHEDULER.isEmpty()) {
                         System.out.println("Schedule is empty.\n");
                     }
                     else {
-                        for (int i = 0; i < currentScheduler.size()-1;i++) {
-                            procDisplay.processDisplay(currentScheduler.get(i));
+                        for (int i = 0; i < CURRENT_SCHEDULER.size()-1;i++) {
+                            ProcessDisplay.display(CURRENT_SCHEDULER.referenceInstruction(i).getParentProcess());
                         }
                     }
                     break;
                 case 4:
                     // start simulation on CPU
-                    startSimulation(currentScheduler, currentDispatcher);
+                    startSimulation(CURRENT_DISPATCHER);
                     break;
                 case 5:
-                    currentScheduler.clear();
+                    CURRENT_SCHEDULER.clear();
                     System.out.println("Schedule is empty.\n");
                     break;
                 case 9: // exit case
@@ -82,35 +85,37 @@ public class Main extends IKernel {
         System.out.println("Closing Application");
     } // end main
 
-    public static void auto(sRoundRobin currentSchedule, Dispatcher currentDispatcher)
+    public static void auto(Dispatcher currentDispatcher)
     {
         // do all the steps automatically/dynamically
         System.out.println("Automatic Mode");
         System.out.println("Generating random number of processes");
         int numProcs = (int) (Math.random() * 100) + 1;
         System.out.println("Building " + numProcs + " new processes..");
-        build(numProcs);
+        build(numProcs, currentDispatcher.getLocalHDD());
         System.out.println("Begin Dispatching..");
-        startSimulation(currentSchedule, currentDispatcher);
+        startSimulation(currentDispatcher);
     } // end auto
 
     public static void build(int num, MassStorage current_HDD) {
         // TODO correct xml file templates
         try {
-            procBuilder.processBuilder(num, current_HDD);
+            ProcessBuilder.build(num, current_HDD);
         }
         catch (Exception e) {
-            System.out.println("Hmm.. I didn't like that input. Try again. \n");
+            System.out.println("There was a problem while trying to build processes. \n");
         }
     } // end build
 
-    public static void startSimulation(sRoundRobin currentSchedule, Dispatcher currentDispatcher){
+    public static void startSimulation(Dispatcher currentDispatcher){
         // TODO implement number of cycles before pausing
-        currentDispatcher.loadSchedule(currentSchedule);
-        if (currentSchedule.isEmpty()) {
+        while (!currentDispatcher.getLocalScheduler().isEmpty()) {
+            currentDispatcher.loadProcess();
+        }
+        if (currentDispatcher.getLocalScheduler().isEmpty()) {
             System.out.println("Schedule Complete. Terminated Processes (in order): ");
         }
-        currentDispatcher.TERMINATED.forEach((e) -> System.out.print(e.getPID() + ". "));
+        // TODO for each process terminated
         System.out.println("\n");
     } // end startSimulation
 

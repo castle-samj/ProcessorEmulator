@@ -1,5 +1,5 @@
 /**
- * @author Sam Castle - 10/23/2022 - CMSC312 CPU Emulator
+ * @author Sam Castle - 11/20/2022 - CMSC312 CPU Emulator
  */
 public class Dispatcher extends IKernel {
 
@@ -15,7 +15,7 @@ public class Dispatcher extends IKernel {
      * load the process from schedule that is first in line to the CPU. Also handles exit cases from CPU.
      * @see CPU#cpuTime
      */
-    private void loadProcess() {
+    public void loadProcess() {
         Instruction currentInstruction = getLocalScheduler().getNextInstruction();
         currentInstruction.changeParentProcessState(state.RUNNING);
 

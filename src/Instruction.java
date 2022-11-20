@@ -1,11 +1,11 @@
 /**
- * @author Sam Castle - 10/23/2022 - CMSC312 CPU Emulator
+ * @author Sam Castle - 11/20/2022 - CMSC312 CPU Emulator
  */
 public class Instruction {
     /**
      * The potential types of instructions. Currently limited to I/O, Calculate, and Fork
      */
-    enum register_types {
+    enum REGISTER_TYPES {
         IO,
         CALCULATION,
         FORK
@@ -14,17 +14,17 @@ public class Instruction {
     /* variables */
     private final Process parent_process;
     private final short parent_pid;
-    private final register_types register;
+    private final REGISTER_TYPES register;
     private final boolean is_io;
     private int cycles_remain;
 
     /* constructor */
-    public Instruction(register_types new_type, int new_cpu_cycles, Process new_parent) {
+    public Instruction(REGISTER_TYPES new_type, int new_cpu_cycles, Process new_parent) {
         this.parent_process = new_parent;
         this.parent_pid = new_parent.getPID();
         this.register = new_type;
         this.cycles_remain = new_cpu_cycles;
-        this.is_io = (new_type.equals(register_types.IO));
+        this.is_io = (new_type.equals(REGISTER_TYPES.IO));
     }
 
     // reduce number of cycles by one
@@ -33,10 +33,13 @@ public class Instruction {
     }
 
     /* getters */
+    public Process getParentProcess() {
+        return this.parent_process;
+    }
     public short getParentPID() {
         return this.parent_pid;
     }
-    public register_types getRegister() {
+    public REGISTER_TYPES getRegister() {
         return register;
     }
     public int getCyclesRemain() {

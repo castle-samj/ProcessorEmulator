@@ -3,29 +3,29 @@
 <processes>
     <temp1>
         <type1>
-            <action> calculate </action>
-            <min> 005 </min>
-            <max> 100</max>
+            <action>calculate</action>
+            <min>005</min>
+            <max>100</max>
         </type1>
         <type1>
-            <action> I/O </action>
-            <min> 010 </min>
-            <max> 020 </max>
+            <action>I/O</action>
+            <min>010</min>
+            <max>020</max>
         </type1>
         <type1>
-            <action> calculate </action>
-            <min> 010 </min>
-            <max> 090 </max>
+            <action>calculate</action>
+            <min>010</min>
+            <max>090</max>
         </type1>
         <type1>
-            <action> I/O </action>
-            <min> 001 </min>
-            <max> 010 </max>
+            <action>I/O</action>
+            <min>001</min>
+            <max>010</max>
         </type1>
         <type1>
-            <action> calculate </action>
-            <min> 050 </min>
-            <max> 095 </max>
+            <action>calculate</action>
+            <min>050</min>
+            <max>095</max>
         </type1>
     </temp1>
     <temp2>

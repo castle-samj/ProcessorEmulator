@@ -1,6 +1,8 @@
 import java.util.ArrayList;
-
-/** Base class of scheduler, to be inherited by each variation of scheduler */
+/**
+ * @author Sam Castle - 11/20/2022 - CMSC312 CPU Emulator
+ * Base class of scheduler, to be inherited by each variation of scheduler
+ */
 abstract class IScheduler extends IKernel {
     /** List of Instructions in the order of priority */
     ArrayList<Instruction> ready_queue = new ArrayList<>();
@@ -10,6 +12,7 @@ abstract class IScheduler extends IKernel {
 
     /* getters */
     abstract public Instruction getNextInstruction();
+    abstract public Instruction referenceInstruction(int index);
 
     abstract int size();
     abstract boolean isEmpty();

@@ -1,7 +1,7 @@
-import java.util.ArrayList;
-import java.util.Arrays;
-
-/** Used to create an instance of Main Memory hardware */
+/**
+ * @author Sam Castle - 11/20/2022 - CMSC312 CPU Emulator
+ * Used to create an instance of Main Memory hardware
+ */
 public class MainMemory extends IHardware
 {
     // memory always to have size 512 for this project, but can be changed in Main()
@@ -19,13 +19,21 @@ public class MainMemory extends IHardware
         this.frames_in_use = new boolean[new_size];
     }
 
-    /** Swap an instruction into main-memory and return its address */
-    public int swapIn(Instruction new_instruction) {
-        int frame_address = randomAddress();
-        this.memory_frames[frame_address] = new_instruction;
-        this.meta_frames[frame_address] = new_instruction.getParentPID();
-        this.frames_in_use[frame_address] = true;
-        return frame_address;
+    /** Attempt to swap an instruction into main-memory, Returns true if successful */
+    public boolean swapIn(Instruction new_instruction) {
+        boolean conclusion = false;
+        int counter = memory_frames.length-1;
+        while (counter >= 0) {
+            int frame_address = randomAddress();
+            if (frames_in_use[frame_address]) {
+                this.memory_frames[frame_address] = new_instruction;
+                this.meta_frames[frame_address] = new_instruction.getParentPID();
+                this.frames_in_use[frame_address] = true;
+                conclusion = true;
+                break;
+            }
+        }
+        return conclusion;
     }
     public void swapOut(Instruction old_instruction) {
 

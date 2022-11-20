@@ -1,8 +1,8 @@
 import java.util.ArrayList;
 
 /**
+ * @author Sam Castle - 11/20/2022 - CMSC312 CPU Emulator
  * Process Control Block class for each process generated
- * @author Sam Castle - 10/23/2022 - CMSC312 CPU Emulator
  */
 abstract class PCB {
     /* variables */
@@ -68,8 +68,16 @@ abstract class PCB {
     }
 
     /* instruction-specific getters */
+    /** Overloaded. Takes an index if known or returns the current Instruction at ProgramCounter */
     public Instruction getCurrentInstruction() {
         return this.instructions_in_process.get(program_counter);
+    }
+    public Instruction getCurrentInstruction(int index) {
+        return this.instructions_in_process.get(index);
+    }
+    /** Overloaded. Takes an index if known or returns the cycles of Instruction at ProgramCounter */
+    public int getInstructionCyclesRemain() {
+        return this.instructions_in_process.get(this.program_counter).getCyclesRemain();
     }
     public int getInstructionCyclesRemain(int i) {
         return this.instructions_in_process.get(i).getCyclesRemain();

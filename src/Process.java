@@ -1,6 +1,6 @@
 /**
+ * @author Sam Castle - 11/20/2022 - CMSC312 CPU Emulator
  * Subclass of PCB. Used to create the process object
- * @author Sam Castle - 10/23/2022 - CMSC312 CPU Emulator
  */
 public class Process extends PCB
 {

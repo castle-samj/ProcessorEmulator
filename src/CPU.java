@@ -1,5 +1,5 @@
 /**
- * @author Sam Castle - 10/23/2022 - CMSC312 CPU Emulator
+ * @author Sam Castle - 11/20/2022 - CMSC312 CPU Emulator
  */
 public class CPU extends IHardware {
 
@@ -22,7 +22,7 @@ public class CPU extends IHardware {
         // check if I/O
         if (current_instruction.isIO()) {
             exit_condition = 1;
-        } else if (current_instruction.getRegister() == Instruction.register_types.FORK) {
+        } else if (current_instruction.getRegister() == Instruction.REGISTER_TYPES.FORK) {
             Fork(current_instruction);
             exit_condition = 3;
         } else {
