@@ -8,14 +8,17 @@ public class Main extends IKernel {
 
         /* System Configuration and Initialization */
 
-        // initialize Main Memory to this size (in MB)
-        setSizeOfMainMemory(512);
+        // initialize sizes (in MB)
+        setSizeOfMemory(512);
         setSizeOfFrame(8);
+        setSizeOfHardDrive(4096);
         setMaxInstructionsPerProcess(5);
+        setTimeSliceDefault(10);
+        // physical locations declared in IHardware
         CPU CURRENT_CPU = new CPU();
-        MassStorage CURRENT_HDD = new MassStorage();
         MainMemory CURRENT_RAM = new MainMemory();
-        IOController CURRENT_IO_CONTROLLER = new IOController();
+        MassStorage CURRENT_HDD = new MassStorage();
+        IODevice CURRENT_IO_CONTROLLER = new IODevice();
         // TODO allow user to select scheduler
         sRoundRobin CURRENT_SCHEDULER = new sRoundRobin();
         Dispatcher CURRENT_DISPATCHER = new Dispatcher(CURRENT_CPU, CURRENT_HDD, CURRENT_RAM, CURRENT_IO_CONTROLLER);
@@ -61,7 +64,8 @@ public class Main extends IKernel {
                     }
                     else {
                         for (int i = 0; i < CURRENT_SCHEDULER.size()-1;i++) {
-                            ProcessDisplay.display(CURRENT_SCHEDULER.referenceInstruction(i).getParentProcess());
+                            // TODO fix this
+                            //ProcessDisplay.display(CURRENT_SCHEDULER.referenceInstruction(i).getParentProcess());
                         }
                     }
                     break;
@@ -85,14 +89,13 @@ public class Main extends IKernel {
         System.out.println("Closing Application");
     } // end main
 
-    public static void auto(Dispatcher currentDispatcher)
-    {
-        // do all the steps automatically/dynamically
+    /** do all the steps automatically/dynamically */
+    public static void auto(Dispatcher currentDispatcher) {
         System.out.println("Automatic Mode");
         System.out.println("Generating random number of processes");
-        int numProcs = (int) (Math.random() * 100) + 1;
-        System.out.println("Building " + numProcs + " new processes..");
-        build(numProcs, currentDispatcher.getLocalHDD());
+        int number_of_processes = (int) (Math.random() * 100) + 1;
+        System.out.println("Building " + number_of_processes + " new processes..");
+        build(number_of_processes, currentDispatcher.getLocalHDD());
         System.out.println("Begin Dispatching..");
         startSimulation(currentDispatcher);
     } // end auto
@@ -109,15 +112,31 @@ public class Main extends IKernel {
 
     public static void startSimulation(Dispatcher currentDispatcher){
         // TODO implement number of cycles before pausing
-        while (!currentDispatcher.getLocalScheduler().isEmpty()) {
-            currentDispatcher.loadProcess();
-        }
+
+        do {
+            currentDispatcher.getLocalScheduler().scheduleSomething();
+            if (!currentDispatcher.getLocalScheduler().isEmpty()) {
+                currentDispatcher.getLocalScheduler().ensureNextIsInMainMemory();
+                currentDispatcher.loadProcess();
+            }
+        } while (processesExist(currentDispatcher));
+
         if (currentDispatcher.getLocalScheduler().isEmpty()) {
-            System.out.println("Schedule Complete. Terminated Processes (in order): ");
+            System.out.println("Schedule Complete. Current Snapshot of Hard Drive: ");
         }
         // TODO for each process terminated
+        currentDispatcher.getLocalHDD().dumpHardDriveInfo();
         System.out.println("\n");
     } // end startSimulation
+
+    public static boolean processesExist(Dispatcher currentDispatcher) {
+        boolean is_empty;
+        if (!(is_empty = currentDispatcher.getLocalRAM().isEmpty())){}
+        else if (!(is_empty = currentDispatcher.getLocalHDD().isVirtualMemoryEmpty())){}
+        else if (!(is_empty = currentDispatcher.getLocalScheduler().isEmpty())){}
+        else {is_empty = currentDispatcher.getLocalIO().isEmpty();}
+        return !is_empty;
+    }
 
 } //end class Main
 

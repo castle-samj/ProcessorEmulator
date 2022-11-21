@@ -10,16 +10,11 @@ abstract class PCB {
     private short pid;
     // pointer to current instruction
     private int program_counter = 0;
-    private ArrayList<Instruction> instructions_in_process = new ArrayList<>();
-    private ArrayList<Integer> instruction_location_in_memory = new ArrayList<>();
+    private final ArrayList<Instruction> instructions_in_process = new ArrayList<>();
 
     // TODO vars not implemented
     // List of open files (parent/child?)
     // Priority
-    // Memory Management Information
-    private int memory_location;
-    // I/O Status
-    // Accounting
     // Fork() [child?]
 
 
@@ -30,12 +25,11 @@ abstract class PCB {
     public void setPID() {
         this.pid = IKernel.generatePid();
     }
+    // TODO use this when Instruction completes in CPU
     public void updateProgramCounter() {
         this.program_counter++;
     }
-    public void setMemoryLocation(int instruction_index, int new_location) {
-        this.instruction_location_in_memory.set(instruction_index, new_location);
-    }
+
 
     /* PCB getters */
     public IKernel.state getCurrentState() {
@@ -66,6 +60,11 @@ abstract class PCB {
     public void addInstruction(int num, Instruction new_instruction) {
         this.instructions_in_process.add(num, new_instruction);
     }
+    public void setAllInstructionLocation(int physical_location, int location_address) {
+        for (Instruction instruction : instructions_in_process) {
+            instruction.setLocation(physical_location, location_address);
+        }
+    }
 
     /* instruction-specific getters */
     /** Overloaded. Takes an index if known or returns the current Instruction at ProgramCounter */
@@ -85,5 +84,8 @@ abstract class PCB {
     /** Returns true if current Instruction is of type I/O */
     public boolean isIO() {
         return this.getCurrentInstruction().isIO();
+    }
+    public int[] getCurrentInstructionLocation() {
+        return this.instructions_in_process.get(program_counter).getLocation();
     }
 } // end class pcb

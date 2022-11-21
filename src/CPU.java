@@ -8,7 +8,7 @@ public class CPU extends IHardware {
         this.hid = IKernel.generateHID();
     }
 
-    /** Returns an _byte_ to signify exit case.
+    /** Returns a _byte_ to signify exit case.
      <ul>
         <li>Case 0: Process was type calculate and has cycles remaining.</li>
         <li>Case 1: Process is type I/O and needs to be moved to WAITING state.</li>
@@ -18,7 +18,7 @@ public class CPU extends IHardware {
      */
     public byte cpuTime(Dispatcher current_dispatcher, Instruction current_instruction) {
         byte exit_condition;
-
+        IKernel.setTimeSlice();
         // check if I/O
         if (current_instruction.isIO()) {
             exit_condition = 1;

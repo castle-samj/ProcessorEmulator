@@ -5,15 +5,19 @@ import java.util.ArrayList;
  */
 abstract class IScheduler extends IKernel {
     /** List of Instructions in the order of priority */
-    ArrayList<Instruction> ready_queue = new ArrayList<>();
+    ArrayList<Short> ready_queue = new ArrayList<>();
 
     /* setters */
     abstract public void addToReadyQueue(Instruction new_instruction);
 
     /* getters */
-    abstract public Instruction getNextInstruction();
-    abstract public Instruction referenceInstruction(int index);
+    abstract public short getNextInstructionPID();
+    abstract public short referenceInstruction(int index);
 
+    /* special */
+    abstract void ensureNextIsInMainMemory();
+    abstract void scheduleSomething();
+    abstract boolean scheduleInstruction(Instruction temp_instruction);
     abstract int size();
     abstract boolean isEmpty();
 }

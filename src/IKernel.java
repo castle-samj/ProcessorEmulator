@@ -4,18 +4,20 @@
  */
 public class IKernel {
     // environment variables
-    private static int SIZE_OF_MAIN_MEMORY;
+    private static int SIZE_OF_MEMORY;
     private static int MAX_INSTRUCTIONS_PER_PROCESS;
     private static int SIZE_OF_FRAME;
+    private static int SIZE_OF_HARD_DRIVE;
     private static CPU LOCAL_CPU;
     private static MassStorage LOCAL_HDD;
     private static MainMemory LOCAL_RAM;
     private static IScheduler LOCAL_SCHEDULER;
-    private static IOController LOCAL_IO;
+    private static IODevice LOCAL_IO;
 
-    private static short PID_CONTROL;
+    private static short PID_CONTROL = 1;
     private static short HID_CONTROL;
-    private int TIME_SLICE;
+    private static int TIME_SLICE_DEFAULT;
+    private static int TIME_SLICE;
 
     /**
      * The states a process can be in
@@ -29,41 +31,47 @@ public class IKernel {
     }
 
     /* setters */
-    public static void setSizeOfMainMemory(int num) {
-        IKernel.SIZE_OF_MAIN_MEMORY = num;
+    public static void setSizeOfMemory(int num) {
+        SIZE_OF_MEMORY = num;
     }
     public static void setMaxInstructionsPerProcess(int num) {
-        IKernel.MAX_INSTRUCTIONS_PER_PROCESS = num;
+        MAX_INSTRUCTIONS_PER_PROCESS = num;
     }
     public static void setSizeOfFrame(int num){
-        IKernel.SIZE_OF_FRAME = num;
+        SIZE_OF_FRAME = num;
+    }
+    public static void setSizeOfHardDrive(int num) {
+        SIZE_OF_HARD_DRIVE = num;
     }
     protected void setLocalCPU(CPU new_cpu) {
-        IKernel.LOCAL_CPU = new_cpu;
+        LOCAL_CPU = new_cpu;
     }
     public void setLocalHdd(MassStorage new_hdd){
-        IKernel.LOCAL_HDD = new_hdd;
+        LOCAL_HDD = new_hdd;
     }
     public void setLocalRAM(MainMemory new_ram) {
-        IKernel.LOCAL_RAM = new_ram;
+        LOCAL_RAM = new_ram;
     }
     public void setLocalScheduler(IScheduler new_scheduler) {
-        IKernel.LOCAL_SCHEDULER = new_scheduler;
+        LOCAL_SCHEDULER = new_scheduler;
     }
-    public void setLocalIO(IOController new_io) {
-        IKernel.LOCAL_IO = new_io;
+    public void setLocalIO(IODevice new_io) {
+        LOCAL_IO = new_io;
     }
 
 
     /* getters */
-    public static int getSize_of_main_memory() {
-        return SIZE_OF_MAIN_MEMORY;
+    public static int getSizeOfMemory() {
+        return SIZE_OF_MEMORY;
     }
-    public static int getMax_instructions_per_process() {
+    public static int getMaxInstructionsPerProcess() {
         return MAX_INSTRUCTIONS_PER_PROCESS;
     }
     public static int getSizeOfFrame() {
         return SIZE_OF_FRAME;
+    }
+    public static int getSizeOfHardDrive() {
+        return SIZE_OF_HARD_DRIVE;
     }
     public static short generatePid() {
         return PID_CONTROL++;
@@ -83,23 +91,29 @@ public class IKernel {
     public IScheduler getLocalScheduler() {
         return LOCAL_SCHEDULER;
     }
-    public IOController getLocalIO() {
+    public IODevice getLocalIO() {
         return LOCAL_IO;
     }
 
     /** Set the CPU's time slice parameter. Used for critical-sections */
-    public void setTimeSlice(int seconds) {
-        this.TIME_SLICE = seconds;
+    public static void setTimeSliceDefault(int seconds) {
+        TIME_SLICE_DEFAULT = seconds;
+    }
+    public static int getTimeSliceDefault() {
+        return TIME_SLICE_DEFAULT;
+    }
+    public static void setTimeSlice() {
+        TIME_SLICE = getTimeSliceDefault();
+    }
+    public static void setTimeSlice(int new_time) {
+        TIME_SLICE = new_time;
     }
     public void decrementTimeSlice() {
-        this.TIME_SLICE--;
+        TIME_SLICE--;
     }
     /** Returns the current value of time_slice (mostly just for the CPU to check) */
     public int getTimeSlice() {
         return TIME_SLICE;
     }
 
-
-    /* state modifiers */
-    // TODO
 }

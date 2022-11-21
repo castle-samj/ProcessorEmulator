@@ -3,137 +3,137 @@
 <processes>
     <temp1>
         <type1>
-            <action>calculate</action>
+            <action>CALCULATE</action>
             <min>005</min>
             <max>100</max>
         </type1>
         <type1>
-            <action>I/O</action>
+            <action>IO</action>
             <min>010</min>
             <max>020</max>
         </type1>
         <type1>
-            <action>calculate</action>
+            <action>CALCULATE</action>
             <min>010</min>
             <max>090</max>
         </type1>
         <type1>
-            <action>I/O</action>
+            <action>IO</action>
             <min>001</min>
             <max>010</max>
         </type1>
         <type1>
-            <action>calculate</action>
+            <action>CALCULATE</action>
             <min>050</min>
             <max>095</max>
         </type1>
     </temp1>
     <temp2>
         <type2>
-            <action> calculate </action>
-            <min> 005 </min>
+            <action>CALCULATE</action>
+            <min> 050 </min>
             <max> 100</max>
         </type2>
         <type2>
-            <action> I/O </action>
+            <action>CALCULATE</action>
+            <min> 020 </min>
+            <max> 030 </max>
+        </type2>
+        <type2>
+            <action>IO</action>
             <min> 010 </min>
-            <max> 020 </max>
+            <max> 025 </max>
         </type2>
         <type2>
-            <action> calculate </action>
+            <action>CALCULATE</action>
             <min> 010 </min>
-            <max> 090 </max>
+            <max> 050 </max>
         </type2>
         <type2>
-            <action> I/O </action>
-            <min> 001 </min>
-            <max> 010 </max>
-        </type2>
-        <type2>
-            <action> calculate </action>
-            <min> 050 </min>
-            <max> 095 </max>
+            <action>CALCULATE</action>
+            <min> 020 </min>
+            <max> 075 </max>
         </type2>
     </temp2>
     <temp3>
         <type3>
-            <action> calculate </action>
+            <action>IO</action>
             <min> 005 </min>
-            <max> 100</max>
+            <max> 010</max>
         </type3>
         <type3>
-            <action> I/O </action>
+            <action>CALCULATE</action>
+            <min> 020 </min>
+            <max> 030 </max>
+        </type3>
+        <type3>
+            <action>IO</action>
             <min> 010 </min>
+            <max> 015 </max>
+        </type3>
+        <type3>
+            <action>CALCULATE</action>
+            <min> 030 </min>
+            <max> 040 </max>
+        </type3>
+        <type3>
+            <action>IO</action>
+            <min> 015 </min>
             <max> 020 </max>
-        </type3>
-        <type3>
-            <action> calculate </action>
-            <min> 010 </min>
-            <max> 090 </max>
-        </type3>
-        <type3>
-            <action> I/O </action>
-            <min> 001 </min>
-            <max> 010 </max>
-        </type3>
-        <type3>
-            <action> calculate </action>
-            <min> 050 </min>
-            <max> 095 </max>
         </type3>
     </temp3>
     <temp4>
         <type4>
-            <action> calculate </action>
-            <min> 005 </min>
-            <max> 100</max>
+            <action>IO</action>
+            <min> 020 </min>
+            <max> 025 </max>
         </type4>
         <type4>
-            <action> I/O </action>
-            <min> 010 </min>
-            <max> 020 </max>
+            <action>CALCULATE</action>
+            <min> 090 </min>
+            <max> 100 </max>
         </type4>
         <type4>
-            <action> calculate </action>
-            <min> 010 </min>
+            <action>CALCULATE</action>
+            <min> 070 </min>
             <max> 090 </max>
         </type4>
         <type4>
-            <action> I/O </action>
+            <action>IO</action>
             <min> 001 </min>
-            <max> 010 </max>
+            <max> 015 </max>
         </type4>
         <type4>
-            <action> calculate </action>
-            <min> 050 </min>
-            <max> 095 </max>
+            <action>CALCULATE</action>
+            <min> 025 </min>
+            <max> 065 </max>
         </type4>
     </temp4>
     <temp5>
         <type5>
-            <action> calculate </action>
-            <min> 005 </min>
-            <max> 100</max>
-        </type5>
-        <type5>
-            <action> I/O </action>
+            <action>CALCULATE</action>
             <min> 010 </min>
-            <max> 020 </max>
+            <max> 100 </max>
         </type5>
         <type5>
-            <action> calculate </action>
-            <min> 010 </min>
-            <max> 090 </max>
-        </type5>
-        <type5>
-            <action> I/O </action>
+            <action>IO</action>
             <min> 001 </min>
-            <max> 010 </max>
+            <max> 025 </max>
         </type5>
         <type5>
-            <action> calculate </action>
-            <min> 050 </min>
-            <max> 095 </max>
+            <action>FORK</action>
+            <min> 001 </min>
+            <max> 001 </max>
+        </type5>
+        <type5>
+            <action>CALCULATE</action>
+            <min> 010 </min>
+            <max> 100 </max>
+        </type5>
+        <type5>
+            <action>IO</action>
+            <min> 001 </min>
+            <max> 025 </max>
         </type5>
     </temp5>
 </processes>
