@@ -24,6 +24,10 @@ public class sRoundRobin extends IScheduler {
     public short referenceInstruction(int index) {
         return this.ready_queue.get(index);
     }
+    public Instruction getInstruction (Dispatcher current_dispatcher, int index) {
+        short next_instruction_pid = getLocalScheduler().referenceInstruction(index);
+        return current_dispatcher.findInstruction(next_instruction_pid);
+    }
 
 
     /* special */
@@ -129,15 +133,11 @@ public class sRoundRobin extends IScheduler {
             }
             // with Instruction in main_memory, swap it to virtual_memory
             Instruction temporary_instruction = getLocalRAM().getInstructionByPID(victim);
-            if (getLocalHDD().addInstructionToVirtualMemory(temporary_instruction)) {
-                return;
-            }
-            // virtual_memory is full, also. Move victim to hard_drive and wear cone of shame
-            else {
+            if (!getLocalHDD().addInstructionToVirtualMemory(temporary_instruction)) {
+                // virtual_memory is full, also. Move victim to hard_drive and wear cone of shame
                 // instruction never left hard_drive, so its instance will be destroyed but retain meta-data
                 temporary_instruction.changeParentProcessState(state.NEW);
             }
-
         } catch (IndexOutOfBoundsException e) {
             System.out.println("Problem while trying victim-selection");
         }
