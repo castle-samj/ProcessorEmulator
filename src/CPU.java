@@ -25,7 +25,6 @@ public class CPU extends IHardware {
             exit_condition = 1;
         } else if (current_instruction.getRegister() == Instruction.REGISTER_TYPES.FORK) {
             current_dispatcher.decrementIfInWaiting();
-            Fork(current_instruction, current_dispatcher);
             exit_condition = 3;
         } else {
             while (current_dispatcher.getTimeSlice() > 0 && (current_instruction.getCyclesRemain() > 0)) {
@@ -51,14 +50,4 @@ public class CPU extends IHardware {
 
         return exit_condition;
     } // end cpuTime
-
-    public void Fork(Instruction toFork, Dispatcher current_dispatcher) {
-        // TODO implement fork()
-        try {
-            ProcessBuilder.build(1, current_dispatcher.getLocalHDD());
-        }
-        catch (Exception e) {
-            System.out.println("There was a problem while trying to build processes. \n");
-        }
-    }
-}
+} // end class CPU
