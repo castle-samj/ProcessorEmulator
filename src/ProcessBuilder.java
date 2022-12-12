@@ -34,32 +34,31 @@ public class ProcessBuilder {
             for (int j = 0; j < template_node_list.getLength(); j++) { // should be 5 times
                 Node temp_node = template_node_list.item(j); // the ith element that matches template_to_use
                 if (temp_node.getNodeType() == Node.ELEMENT_NODE) { // ELEMENT_NODE means has sub-elements
-                    Element template_element = (Element) temp_node;
+                    for (int k = 0; k < 5; k++) {
+                        Element template_element = (Element) temp_node;
 
-                    Instruction.REGISTER_TYPES temp_type;
-                    String temp_type_str = template_element.getElementsByTagName("action").item(0).getTextContent().trim();
-                    if (temp_type_str.contains("FORK")){
-                        temp_type = Instruction.REGISTER_TYPES.FORK;
-                    }
-                    else if (temp_type_str.contains("IO")){
-                        temp_type = Instruction.REGISTER_TYPES.IO;
-                    }
-                    else if (temp_type_str.contains("CALCULATE")){
-                        temp_type = Instruction.REGISTER_TYPES.CALCULATE;
-                    }
-                    else {
-                        System.out.println("ProcessBuilder failed to read process instruction type");
-                        break;
-                    }
+                        Instruction.REGISTER_TYPES temp_type;
+                        String temp_type_str = template_element.getElementsByTagName("action").item(k).getTextContent().trim();
+                        if (temp_type_str.contains("CALCULATE")) {
+                            temp_type = Instruction.REGISTER_TYPES.CALCULATE;
+                        } else if (temp_type_str.contains("IO")) {
+                            temp_type = Instruction.REGISTER_TYPES.IO;
+                        } else if (temp_type_str.contains("FORK")) {
+                            temp_type = Instruction.REGISTER_TYPES.FORK;
+                        } else {
+                            System.out.println("ProcessBuilder failed to read process instruction type");
+                            break;
+                        }
 
-                    int temp_min = Integer.parseInt(template_element.getElementsByTagName("min").item(0).getTextContent().trim());
-                    int temp_max = Integer.parseInt(template_element.getElementsByTagName("max").item(0).getTextContent().trim());
-                    int temp_cycles = (int) (Math.random() * (temp_max - temp_min + 1) + temp_min);
+                        int temp_min = Integer.parseInt(template_element.getElementsByTagName("min").item(0).getTextContent().trim());
+                        int temp_max = Integer.parseInt(template_element.getElementsByTagName("max").item(0).getTextContent().trim());
+                        int temp_cycles = (int) (Math.random() * (temp_max - temp_min + 1) + temp_min);
 
-                    //create Instruction
-                    Instruction temp_instruction = new Instruction(temp_type, temp_cycles, new_process);
-                    //add Instruction to Process
-                    new_process.addInstruction(j, temp_instruction);
+                        //create Instruction
+                        Instruction temp_instruction = new Instruction(temp_type, temp_cycles, new_process);
+                        //add Instruction to Process
+                        new_process.addInstruction(j, temp_instruction);
+                    }
                 }
             }
             // move Process to hard_drive
