@@ -4,9 +4,10 @@
 public class ProcessDisplay {
     public static void display(Process display_process) {
         System.out.println("PID " + display_process.getPID() + " in state " + display_process.getCurrentState());
-        System.out.println("Remaining Instructions: " + display_process.getProcessCyclesRemain());
-        for (int i = 0; i < display_process.sizeOfProcess(); i++) {
-            System.out.println("     - " + display_process.getCurrentInstruction(i) + ": "
+        int num_instructions_in_process = display_process.sizeOfProcess();
+        System.out.println("Remaining Instructions: " + num_instructions_in_process);
+        for (int i = 0; i < num_instructions_in_process; i++) {
+            System.out.println("     - " + display_process.getCurrentInstruction(i).getRegister() + ": "
                     + display_process.getInstructionCyclesRemain(i) + " Cycles Remaining");
         }
     } // end processDisplay
