@@ -46,48 +46,60 @@ public class Main extends IKernel {
 
             //switch statement to catch inputs
             switch (menu) {
-                case -1 -> System.out.println("Invalid input!\n");
-                case 1 ->
-                    // automatic trial run
+                case -1:
+                        System.out.println("Invalid input!\n");
+                        break;
+
+                case 1:
+                        // automatic trial run
                         auto(CURRENT_DISPATCHER);
-                case 2 -> {
-                    // create new processes
-                    System.out.println("Enter a number of processes to create:");
-                    int userNum = Integer.parseInt(userInput.nextLine());
-                    build(userNum, CURRENT_HDD);
-                    for (int i = 0; i < userNum; i++) {
-                        CURRENT_SCHEDULER.scheduleSomething();
-                    }
-                }
-                case 3 -> {
-                    // display scheduled processes
-                    if (CURRENT_SCHEDULER.isEmpty()) {
-                        System.out.println("Schedule is empty.\n");
-                    } else {
-                        // list of current Processes in Schedule
-                        ArrayList<Process> procs_to_display = new ArrayList<>();
-                        for (int i = 0; i < CURRENT_SCHEDULER.size() - 1; i++) {
-                            // get instruction in Scheduler
-                            Instruction instruction = CURRENT_SCHEDULER.getInstruction(CURRENT_DISPATCHER, i);
-                            if (!procs_to_display.contains(instruction.getParentProcess())) {
-                                procs_to_display.add(instruction.getParentProcess());
+                        break;
+
+                case 2:
+                        // create new processes
+                        System.out.println("Enter a number of processes to create:");
+                        int userNum = Integer.parseInt(userInput.nextLine());
+                        build(userNum, CURRENT_HDD);
+                        for (int i = 0; i < userNum; i++) {
+                            CURRENT_SCHEDULER.scheduleSomething();
+                        }
+                        break;
+
+                case 3:
+                        // display scheduled processes
+                        if (CURRENT_SCHEDULER.isEmpty()) {
+                            System.out.println("Schedule is empty.\n");
+                        } else {
+                            // list of current Processes in Schedule
+                            ArrayList<Process> procs_to_display = new ArrayList<>();
+                            for (int i = 0; i < CURRENT_SCHEDULER.size() - 1; i++) {
+                                // get instruction in Scheduler
+                                Instruction instruction = CURRENT_SCHEDULER.getInstruction(CURRENT_DISPATCHER, i);
+                                if (!procs_to_display.contains(instruction.getParentProcess())) {
+                                    procs_to_display.add(instruction.getParentProcess());
+                                }
+                            }
+                            for (Process process : procs_to_display) {
+                                ProcessDisplay.display(process);
                             }
                         }
-                        for (Process process : procs_to_display) {
-                            ProcessDisplay.display(process);
-                        }
-                    }
-                }
-                case 4 ->
-                    // start simulation on CPU
+                        break;
+
+                case 4:
+                        // start simulation on CPU
                         startSimulation(CURRENT_DISPATCHER);
-                case 5 -> {
-                    CURRENT_SCHEDULER.clear();
-                    System.out.println("Schedule is empty.\n");
-                }
-                case 9 -> // exit case
+                        break;
+                case 5:
+                        CURRENT_SCHEDULER.clear();
+                        System.out.println("Schedule is empty.\n");
+                        break;
+
+                case 9:
+                        // exit case
                         run = false;
-                default -> // default catch for errors
+                        break;
+                default:
+                        // default catch for errors
                         System.out.println("You input " + menu + ". Please input a valid integer.\n");
             } // end switch
 

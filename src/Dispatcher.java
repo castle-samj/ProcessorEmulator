@@ -23,16 +23,19 @@ public class Dispatcher extends IKernel {
             current_instruction.setLocation(getLocalCPU().cpu_location, 0);
             byte result = getLocalCPU().cpuTime(this, current_instruction);
             switch (result) {
-                case 0 -> {
+                case 0:
                     // Process has cycles remaining.
                     if (!getLocalScheduler().scheduleInstruction(current_instruction)) {
-                        System.out.println("Something went wrong moving the Instruction from CPU to Memory");
+                        System.out.println("Something went wrong moving the Instruction from CPU to Memory\n");
                     }
-                }
-                case 1 ->
+                    break;
+
+                case 1:
                     // Process is type I/O and needs to be moved to WAITING state.
-                        getLocalIO().addToWaiting(current_instruction);
-                case 2 -> {
+                    getLocalIO().addToWaiting(current_instruction);
+                    break;
+
+                case 2:
                     // Instruction has no cycles remaining and timeSlice is still valid
                     if (current_instruction.getParentProcess().getProcessCyclesRemain() > 0) {
                         current_instruction.getParentProcess().updateProgramCounter();
@@ -40,14 +43,14 @@ public class Dispatcher extends IKernel {
                     } else {
                         current_instruction.changeParentProcessState(state.TERMINATED);
                     }
-                }
-                case 3 -> {
+                    break;
+
+                case 3:
                     try {
                         ProcessBuilder.build(1, getLocalHDD());
                     } catch (Exception e) {
                         System.out.println("There was a problem while trying to build processes. \n");
                     }
-                }
             }
         } else {
             System.out.println("Could not load Instruction from Scheduler");
@@ -70,6 +73,6 @@ public class Dispatcher extends IKernel {
         if (!getLocalIO().isEmpty()) {
             getLocalIO().decrementWaiting(this);
         }
-     } // end decrementWaiting
+    } // end decrementWaiting
 
 } // end Dispatcher
