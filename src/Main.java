@@ -2,7 +2,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
- * @author Sam Castle - 11/20/2022 - CMSC312 CPU Emulator
+ * @author Sam Castle - 12/12/2022 - CMSC312 CPU Emulator
  */
 public class Main extends IKernel {
     public static void main(String[] args) {

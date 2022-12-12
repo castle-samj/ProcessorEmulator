@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 
 /**
- * @author Sam Castle - 11/20/2022 - CMSC312 CPU Emulator
+ * @author Sam Castle - 12/12/2022 - CMSC312 CPU Emulator
  * Class responsible for the handling of processes when they are needing I/O support
  * Emulates the WAITING state for a process
  */

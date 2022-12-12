@@ -1,6 +1,6 @@
 import java.util.ArrayList;
 /**
- * @author Sam Castle - 11/20/2022 - CMSC312 CPU Emulator
+ * @author Sam Castle - 12/12/2022 - CMSC312 CPU Emulator
  * Base class of scheduler, to be inherited by each variation of scheduler
  */
 abstract class IScheduler extends IKernel {

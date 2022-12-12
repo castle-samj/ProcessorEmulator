@@ -1,5 +1,5 @@
 /**
- * @author Sam Castle - 11/20/2022 - CMSC312 CPU Emulator
+ * @author Sam Castle - 12/12/2022 - CMSC312 CPU Emulator
  */
 public class ProcessDisplay {
     public static void display(Process display_process) {
