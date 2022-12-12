@@ -2,7 +2,7 @@
  * @author Sam Castle - 11/20/2022 - CMSC312 CPU Emulator
  * Maintains some persistent information for the current instance
  */
-public class IKernel {
+public class IKernel implements Runnable {
     // environment variables
     private static int SIZE_OF_MEMORY;
     private static int MAX_INSTRUCTIONS_PER_PROCESS;
@@ -116,4 +116,10 @@ public class IKernel {
         return TIME_SLICE;
     }
 
+    /**
+     * Threads
+     */
+    public void run() {
+
+    }
 }

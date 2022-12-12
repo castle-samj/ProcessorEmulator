@@ -15,13 +15,14 @@ public class Main extends IKernel {
         setMaxInstructionsPerProcess(5);
         setTimeSliceDefault(10);
         // physical locations declared in IHardware
-        CPU CURRENT_CPU = new CPU();
+        CPU CPU_ONE = new CPU();
+        CPU CPU_TWO = new CPU();
         MainMemory CURRENT_RAM = new MainMemory();
         MassStorage CURRENT_HDD = new MassStorage();
         IODevice CURRENT_IO_CONTROLLER = new IODevice();
         // TODO allow user to select scheduler
         sRoundRobin CURRENT_SCHEDULER = new sRoundRobin();
-        Dispatcher CURRENT_DISPATCHER = new Dispatcher(CURRENT_CPU, CURRENT_HDD, CURRENT_RAM, CURRENT_IO_CONTROLLER);
+        Dispatcher CURRENT_DISPATCHER = new Dispatcher(CPU_ONE, CURRENT_HDD, CURRENT_RAM, CURRENT_IO_CONTROLLER);
         CURRENT_DISPATCHER.setLocalScheduler(CURRENT_SCHEDULER);
 
         Scanner userInput = new Scanner(System.in);

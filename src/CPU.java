@@ -21,9 +21,11 @@ public class CPU extends IHardware {
         IKernel.setTimeSlice();
         // check if I/O
         if (current_instruction.isIO()) {
+            current_dispatcher.decrementIfInWaiting();
             exit_condition = 1;
         } else if (current_instruction.getRegister() == Instruction.REGISTER_TYPES.FORK) {
-            Fork(current_instruction);
+            current_dispatcher.decrementIfInWaiting();
+            Fork(current_instruction, current_dispatcher);
             exit_condition = 3;
         } else {
             while (current_dispatcher.getTimeSlice() > 0 && (current_instruction.getCyclesRemain() > 0)) {
@@ -37,9 +39,11 @@ public class CPU extends IHardware {
             }
 
             if (current_instruction.getCyclesRemain() == 0) {
+                current_dispatcher.decrementIfInWaiting();
                 // handle TERMINATE first
                 exit_condition = 2;
             } else {
+                current_dispatcher.decrementIfInWaiting();
                 // default exit because more cycles remain
                 exit_condition = 0;
             }
@@ -48,7 +52,13 @@ public class CPU extends IHardware {
         return exit_condition;
     } // end cpuTime
 
-    public void Fork(Instruction toFork) {
+    public void Fork(Instruction toFork, Dispatcher current_dispatcher) {
         // TODO implement fork()
+        try {
+            ProcessBuilder.build(1, current_dispatcher.getLocalHDD());
+        }
+        catch (Exception e) {
+            System.out.println("There was a problem while trying to build processes. \n");
+        }
     }
 }
