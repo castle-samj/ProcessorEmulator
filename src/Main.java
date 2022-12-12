@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
@@ -44,46 +45,50 @@ public class Main extends IKernel {
             catch (Exception e) { menu =-1; }
 
             //switch statement to catch inputs
-            switch(menu) {
-                case -1:
-                    System.out.println("Invalid input!\n");
-                    break;
-                case 1:
+            switch (menu) {
+                case -1 -> System.out.println("Invalid input!\n");
+                case 1 ->
                     // automatic trial run
-                    auto(CURRENT_DISPATCHER);
-                    break;
-                case 2:
+                        auto(CURRENT_DISPATCHER);
+                case 2 -> {
                     // create new processes
                     System.out.println("Enter a number of processes to create:");
                     int userNum = Integer.parseInt(userInput.nextLine());
                     build(userNum, CURRENT_HDD);
-                    break;
-                case 3:
+                    for (int i = 0; i < userNum; i++) {
+                        CURRENT_SCHEDULER.scheduleSomething();
+                    }
+                }
+                case 3 -> {
                     // display scheduled processes
                     if (CURRENT_SCHEDULER.isEmpty()) {
                         System.out.println("Schedule is empty.\n");
-                    }
-                    else {
-                        for (int i = 0; i < CURRENT_SCHEDULER.size()-1;i++) {
-                            // TODO fix this
-                            //ProcessDisplay.display(CURRENT_SCHEDULER.referenceInstruction(i).getParentProcess());
+                    } else {
+                        // list of current Processes in Schedule
+                        ArrayList<Process> procs_to_display = new ArrayList<>();
+                        for (int i = 0; i < CURRENT_SCHEDULER.size() - 1; i++) {
+                            // get instruction in Scheduler
+                            Instruction instruction = CURRENT_SCHEDULER.getInstruction(CURRENT_DISPATCHER, i);
+                            if (!procs_to_display.contains(instruction.getParentProcess())) {
+                                procs_to_display.add(instruction.getParentProcess());
+                            }
+                        }
+                        for (Process process : procs_to_display) {
+                            ProcessDisplay.display(process);
                         }
                     }
-                    break;
-                case 4:
+                }
+                case 4 ->
                     // start simulation on CPU
-                    startSimulation(CURRENT_DISPATCHER);
-                    break;
-                case 5:
+                        startSimulation(CURRENT_DISPATCHER);
+                case 5 -> {
                     CURRENT_SCHEDULER.clear();
                     System.out.println("Schedule is empty.\n");
-                    break;
-                case 9: // exit case
-                    run = false;
-                    break;
-                default: // default catch for errors
-                    System.out.println("You input " + menu + ". Please input a valid integer.\n");
-                    break;
+                }
+                case 9 -> // exit case
+                        run = false;
+                default -> // default catch for errors
+                        System.out.println("You input " + menu + ". Please input a valid integer.\n");
             } // end switch
 
         } //end while control loop
@@ -131,11 +136,11 @@ public class Main extends IKernel {
     } // end startSimulation
 
     public static boolean processesExist(Dispatcher currentDispatcher) {
-        boolean is_empty;
-        if (!(is_empty = currentDispatcher.getLocalRAM().isEmpty())){}
-        else if (!(is_empty = currentDispatcher.getLocalHDD().isVirtualMemoryEmpty())){}
-        else if (!(is_empty = currentDispatcher.getLocalScheduler().isEmpty())){}
-        else {is_empty = currentDispatcher.getLocalIO().isEmpty();}
+        boolean is_empty = true;
+        if (!currentDispatcher.getLocalRAM().isEmpty()) { is_empty = false; }
+        else if (!currentDispatcher.getLocalHDD().isVirtualMemoryEmpty()) { is_empty = false; }
+        else if (!currentDispatcher.getLocalScheduler().isEmpty()) { is_empty = false; }
+        else if (!currentDispatcher.getLocalIO().isEmpty()) { is_empty = false; }
         return !is_empty;
     }
 
