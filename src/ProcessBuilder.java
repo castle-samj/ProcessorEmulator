@@ -46,7 +46,7 @@ public class ProcessBuilder {
                         } else if (temp_type_str.contains("FORK")) {
                             temp_type = Instruction.REGISTER_TYPES.FORK;
                         } else {
-                            System.out.println("ProcessBuilder failed to read process instruction type");
+                            System.out.println("ProcessBuilder: failed to read process instruction type");
                             break;
                         }
 

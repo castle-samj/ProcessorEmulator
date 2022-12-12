@@ -71,9 +71,11 @@ public class MainMemory extends IHardware {
     public boolean hasPID(short pid) {
         boolean conclusion = false;
         for (short test_index = 1; test_index < (main_memory_meta.length-1); test_index++) {
-            if (main_memory_meta[test_index] == pid){
-                conclusion = true;
-                break;
+            if (main_memory_meta[test_index] != null) {
+                if (main_memory_meta[test_index] == pid) {
+                    conclusion = true;
+                    break;
+                }
             }
         }
         return conclusion;

@@ -43,7 +43,7 @@ abstract class PCB {
     /* process-specific getters */
     public int getProcessCyclesRemain() {
         int sum = 0;
-        for (int i = this.instructions_in_process.size()-1; i > this.sizeOfProcess(); i--){
+        for (int i = this.program_counter; i < this.sizeOfProcess(); i++){
             sum = sum + this.getInstructionCyclesRemain(i);
         }
         return sum;

@@ -112,10 +112,9 @@ public class MassStorage extends IHardware {
     }
     public void dumpHardDriveInfo() {
         for (Process process : this.hard_drive) {
-            if (process == null) {
-                break;
+            if (!(process == null)) {
+                ProcessDisplay.display(process);
             }
-            ProcessDisplay.display(process);
         }
     }
 

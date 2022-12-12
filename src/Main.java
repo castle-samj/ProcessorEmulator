@@ -75,8 +75,10 @@ public class Main extends IKernel {
                             for (int i = 0; i < CURRENT_SCHEDULER.size() - 1; i++) {
                                 // get instruction in Scheduler
                                 Instruction instruction = CURRENT_SCHEDULER.getInstruction(CURRENT_DISPATCHER, i);
-                                if (!procs_to_display.contains(instruction.getParentProcess())) {
-                                    procs_to_display.add(instruction.getParentProcess());
+                                if (instruction != null) {
+                                    if (!procs_to_display.contains(instruction.getParentProcess())) {
+                                        procs_to_display.add(instruction.getParentProcess());
+                                    }
                                 }
                             }
                             for (Process process : procs_to_display) {
@@ -124,7 +126,7 @@ public class Main extends IKernel {
             ProcessBuilder.build(num, current_HDD);
         }
         catch (Exception e) {
-            System.out.println("There was a problem while trying to build processes. \n");
+            System.out.println("Main: There was a problem while trying to build processes. \n");
         }
     } // end build
 

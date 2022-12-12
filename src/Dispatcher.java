@@ -26,7 +26,7 @@ public class Dispatcher extends IKernel {
                 case 0:
                     // Process has cycles remaining.
                     if (!getLocalScheduler().scheduleInstruction(current_instruction)) {
-                        System.out.println("Something went wrong moving the Instruction from CPU to Memory\n");
+                        System.out.println("Dispatcher: Something went wrong moving the Instruction from CPU to Memory\n");
                     }
                     break;
 
@@ -49,11 +49,11 @@ public class Dispatcher extends IKernel {
                     try {
                         ProcessBuilder.build(1, getLocalHDD());
                     } catch (Exception e) {
-                        System.out.println("There was a problem while trying to build processes. \n");
+                        System.out.println("Dispatcher There was a problem while trying to build processes. \n");
                     }
             }
         } else {
-            System.out.println("Could not load Instruction from Scheduler");
+            System.out.println("Dispatcher: Could not load Instruction from Scheduler");
         }
     } // end loadProcess
 

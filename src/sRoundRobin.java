@@ -52,6 +52,9 @@ public class sRoundRobin extends IScheduler {
                     // after victimSelection, try again to fit into main_memory
                 }
             }
+            else {
+                break;
+            }
         }
     }
     @Override
@@ -65,7 +68,7 @@ public class sRoundRobin extends IScheduler {
     @Override
     public void scheduleSomething() {
         // if memory is full, do not schedule something
-        if (getLocalRAM().isFull() && getLocalHDD().isVirtualMemoryFull()) {
+        if (!(getLocalRAM().isFull()) && !(getLocalHDD().isVirtualMemoryFull())) {
             return;
         }
         // if hard_drive has any NEW process, get instruction
@@ -139,7 +142,7 @@ public class sRoundRobin extends IScheduler {
                 temporary_instruction.changeParentProcessState(state.NEW);
             }
         } catch (IndexOutOfBoundsException e) {
-            System.out.println("Problem while trying victim-selection");
+            System.out.println("RR: Problem while trying victim-selection");
         }
     }
 }
