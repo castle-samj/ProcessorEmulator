@@ -49,7 +49,7 @@ abstract class PCB {
         return sum;
     }
     public int sizeOfProcess() {
-        return (this.instructions_in_process.size() - program_counter)-1;
+        return (this.instructions_in_process.size() - program_counter);
     }
     public boolean isEmpty() {
         return this.instructions_in_process.isEmpty();
@@ -81,10 +81,7 @@ abstract class PCB {
     public int getInstructionCyclesRemain(int i) {
         return this.instructions_in_process.get(i).getCyclesRemain();
     }
-    /** Returns true if current Instruction is of type I/O */
-    public boolean isIO() {
-        return this.getCurrentInstruction().isIO();
-    }
+
     public int[] getCurrentInstructionLocation() {
         return this.instructions_in_process.get(program_counter).getLocation();
     }
