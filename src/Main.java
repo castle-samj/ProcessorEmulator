@@ -6,7 +6,6 @@ import java.util.Scanner;
  */
 public class Main extends IKernel {
     public static void main(String[] args) {
-
         /* System Configuration and Initialization */
 
         // initialize sizes (in MB)
